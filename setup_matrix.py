@@ -2,6 +2,7 @@ import numpy as np
 
 NUM_NODES = 4039
 
+
 def read_input(filename):
     arr = np.zeros((NUM_NODES, NUM_NODES), dtype='int')
     with open(filename, 'r') as f:
