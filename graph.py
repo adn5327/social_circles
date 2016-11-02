@@ -1,6 +1,7 @@
 import community
 import matplotlib.pyplot as plt
 import networkx as nx
+import sys
 import time
 
 import setup_matrix
@@ -23,6 +24,7 @@ def run(filename):
 
     #drawing
     size = float(len(set(partition.values())))
+    print('spring layout')
     pos = nx.spring_layout(G)
     count = 0.
     print('starting to draw graph')
@@ -37,4 +39,7 @@ def run(filename):
     
 
 if __name__ == "__main__":
-    run('data/facebook_combined.txt')
+    if len(sys.argv) == 1:
+        run('data/facebook_combined.txt')
+    else:
+        run(sys.argv[1])
