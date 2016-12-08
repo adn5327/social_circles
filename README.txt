@@ -1,5 +1,5 @@
 Facebook Detecting Social Circles
-Austin Chung, Abhishek Nigam, Jakub Klapacz
+Austin Chung, Abhishek Deep Nigam
 
 To run code:
 
@@ -8,6 +8,7 @@ These include the ones in requirements.txt:
 numpy
 pyamg
 scikit
+scipy
 
 As well as a few others
 
@@ -19,3 +20,11 @@ community
 2) run 'python graph.py'
 
 graph.py can take a long time to run. Please be patient!
+
+
+
+To run the Girvan Newman algorithm:
+1) Follow step 1 as above.
+2) Run 'python project_gn.py data/facebook_combined.txt'
+
+This can take a long time to run as well!
