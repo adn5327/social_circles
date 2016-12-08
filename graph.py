@@ -10,54 +10,25 @@ import setup_matrix
 class Louvain():
 
     def __init__(self, filename):
+        """
+        Initialize the graph from a file
+        """
         self.graph = self.setup_graph(filename)
 
     def setup_graph(self, filename):
+        """
+        Given an adjacency matrix, populate the graph we will use
+        """
         adj = setup_matrix.read_input(filename)
         G = nx.from_numpy_matrix(adj)
         return G
     
-    def girvan_newman(self):
-        comp  = nx.girvan_newman(self.graph)
-        print(tuple(sorted(c) for c in next(comp)))
-
     def detect_communities(self):
+        """
+        Run the algorithm for community detection.
+        """
         best = community.best_partition(self.graph)
         return best
-
-    '''
-    Referenced https://en.wikipedia.org/wiki/Modularity_%28networks%29 for modularity.
-    '''
-    def modularity(self):
-        degrees = self.get_node_degrees()
-        adj_mat = nx.adj_matrix(self.graph)
-        m = float(len(self.graph.edges()))
-        if m != self.m:
-            print("NONONO {} -- {}".format(self.m, m))
-        q = 0.
-        list_of_lists = sorted(nx.connected_components(self.graph), key=len)
-        # print(list_of_lists)
-        for each in list_of_lists:
-            for i in each:
-                for j in each:
-                    cur = adj_mat[i,j]
-                    kikj = degrees[i] * degrees[j]
-                    cur -= (kikj)/(2.0*m)
-                    q += cur
-        q = q/(2.0*m)
-        return q
-
-    def get_node_degrees(self):
-        adj_mat = nx.adj_matrix(self.graph)
-        node_list = self.graph.nodes()
-        ret_dict = {}
-        node_degrees = adj_mat.sum(axis=1)
-        self.m = 0
-        for i in range(len(node_list)):
-            self.m += node_degrees[i,0]
-            ret_dict[node_list[i]] = node_degrees[i,0]
-        self.m /= 2
-        return ret_dict
 
     def getTrue(self, filename):
         true = []
